@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Advice generator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&family=Niconne&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-family: "Manrope";
+      background: hsl(218, 23%, 16%);
+    }
+
+    .advise {
+      background: hsl(217, 19%, 24%);
+
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      color: hsl(193, 38%, 86%);
+      font-family: "Manrope";
+      width: 350px;
+      font-size: 30px;
+    }
+
+    .adviseno {
+      font-size: large;
+      color: hsl(150, 100%, 66%);
+      padding: 12px;
+    }
+
+    .suggestion {
+      padding: 8px;
+    }
+
+    .dice img {
+      padding: 10px;
+    }
+
+    .dice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 48%;
+      background: hsl(150, 100%, 66%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      transition: all 0.5s ease-in-out;
+    }
+
+    @media (max-width:633px) {
+      .dice {
+        left: 45%;
+      }
+    }
+
+    .dice:hover {
+      box-shadow: inset 0px 0px 5px hsl(150, 100%, 66%), 0px 0px 15px hsl(150, 100%, 66%);
+    }
+
+    .attribution {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-size: 20px;
+      width: 100%;
+      font-size: 11px;
+      text-align: center;
+      padding: 8px;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .attribution a {
+      text-decoration: none;
+      color: #ffff00;
+      font-weight: 900;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="advise">
+      <div class="adviseno">Advise #177</div>
+      <div class="suggestion">
+        "This is Created by Me"
+      </div>
+      <div><img src="./images/pattern-divider-mobile.svg" alt=""></div>
+      <div class="dice" onclick="fetchData()"><img src="./images/icon-dice.svg" alt=""></div>
+    </div>
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/JavidSumra">Javid Sumra</a>.
+    </div>
+  </div>
+  <script>
+    const fetchData = async () => {
+      let response = await fetch("https://api.adviceslip.com/advice"),
+        data = await response.json();
+      console.log(data)
+      document.querySelector(".suggestion").innerHTML = `"${data.slip.advice}"`
+      document.querySelector(".adviseno").innerHTML = `Advise #${data.slip.id}`
+    }
+    // fetchData();
+  </script>
+</body>
+
+</html>
